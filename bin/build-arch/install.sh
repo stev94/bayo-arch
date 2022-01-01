@@ -55,8 +55,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 echo "Executing post-init script"
-cp -r /root/bayo-arch /mnt/root
-arch-chroot /mnt /bin/bash /root/bayo-arch/bin/build-arch/post-install.sh
+cp -r /root/bayo-arch /mnt/home
+arch-chroot /mnt /bin/bash /home/bayo-arch/bin/build-arch/post-install.sh
 
 umount -R /mnt
 
