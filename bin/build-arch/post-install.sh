@@ -28,6 +28,8 @@ confirm() {
 CURR_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIR="$CURR_DIR"/../..
 
+username=stev
+hostname=egle-arch
 #read -r -p "Enter computer name: " hostname
 #read -r -p "Enter a new user name: " username
 #
@@ -88,39 +90,39 @@ ROOT_DIR="$CURR_DIR"/../..
 #pacman -Syyu
 #grep -v "#" "$INSTALL_DIR"/pacmanlist.txt | pacman -S --noconfirm -
 
-echo "Setting up coloring in pacman"
-sed --in-place=.bak 's/^#COLOR/COLOR/' /etc/pacman.conf
-
-#################
-# Setting up UI #
-#################
-echo "Setting up lightdm"
-sed --in-place=.bak -e "s/#autologin-user=.*/autologin-user=$USER/g" \
-                    -e "s/#autologin-session=.*/autologin-session=i3/g" \
-                    -e "s/#greeter-session=.*/greeter-session=lightdm-gtk-greeter/g" \
-                    /etc/lightdm/lightdm.conf
-systemctl enable lightdm
-
+#echo "Setting up coloring in pacman"
+#sed --in-place=.bak 's/^#COLOR/COLOR/' /etc/pacman.conf
+#
+##################
+## Setting up UI #
+##################
+#echo "Setting up lightdm"
+#sed --in-place=.bak -e "s/#autologin-user=.*/autologin-user=$USER/g" \
+#                    -e "s/#autologin-session=.*/autologin-session=i3/g" \
+#                    -e "s/#greeter-session=.*/greeter-session=lightdm-gtk-greeter/g" \
+#                    /etc/lightdm/lightdm.conf
+#systemctl enable lightdm
+#
+######################
+## Starting services #
+######################
+#echo "Enabling boot services"
+#systemctl enable sshd
+#systemctl enable dhcpcd
+#systemctl enable NetworkManager
+#systemctl enable bluetooth
+#systemctl enable cronie.service
+#systemctl enable tlp.service
+#systemctl enable NetworkManager-dispatcher.service
+## mask to avoid conflicts
+#systemctl mask systemd-rfkill.service
+#systemctl mask systemd-rfkill.socket
+#
 #####################
-# Starting services #
+## SETTING ROOT ZSH #
 #####################
-echo "Enabling boot services"
-systemctl enable sshd
-systemctl enable dhcpcd
-systemctl enable NetworkManager
-systemctl enable bluetooth
-systemctl enable cronie.service
-systemctl enable tlp.service
-systemctl enable NetworkManager-dispatcher.service
-# mask to avoid conflicts
-systemctl mask systemd-rfkill.service
-systemctl mask systemd-rfkill.socket
-
-####################
-# SETTING ROOT ZSH #
-####################
-mkdir -p /etc/zsh
-cp -r "$ROOT_DIR"/configs/zsh/etc /etc/zsh
+#mkdir -p /etc/zsh
+#cp -r "$ROOT_DIR"/configs/zsh/etc /etc/zsh
 
 ###################
 ## SWITCHING USER #
