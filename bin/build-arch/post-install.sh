@@ -122,6 +122,12 @@ systemctl mask systemd-rfkill.socket
 mkdir -p /etc/zsh
 cp -r "$ROOT_DIR"/configs/zsh/etc /etc/zsh
 
+#################
+## ADD CRONJOBS #
+#################
+echo "Installing cronjobs"
+bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
+
 ###################
 ## SWITCHING USER #
 ###################
@@ -141,9 +147,6 @@ su "$username" <<EOF
   sudo chown -R "$username":users ./yay
   cd yay
   makepkg -si --noconfirm
-
-  echo "Installing cronjobs"
-  bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
 
   ##############
   # Setting i3 #
