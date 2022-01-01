@@ -26,7 +26,7 @@ confirm() {
 }
 
 CURR_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIR="$CURR_DIR"/../../
+ROOT_DIR="$CURR_DIR"/../..
 
 #read -r -p "Enter computer name: " hostname
 #read -r -p "Enter a new user name: " username
