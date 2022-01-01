@@ -73,15 +73,15 @@ ROOT_DIR="$SCRIPT_DIR"/../../
 #EOF
 #echo "KEYMAP=it" > /etc/vconsole.conf
 ##sed --in-place=.bak 's/^HOOKS.*/HOOKS=\(base udev autodetect modconf block filesystems keyboard fsck keymap\)/' /etc/mkinitcpio.conf
-localectl set-keymap it
-
-echo "Configuring hostname"
-echo "$hostname" > /etc/hostname
-
-echo "Setting up Xorg drivers"
-confirm "Do you want to install the Intel driver" && pacman -S --noconfirm mesa xf86-video-intel
-confirm "Do you want to install the AMD driver" && pacman -S --noconfirm mesa xf86-video-amdgpu
-confirm "Do you want to install the NVIDIA driver" && pacman -S --noconfirm nvidia nvidia-utils
+#localectl set-keymap it
+#
+#echo "Configuring hostname"
+#echo "$hostname" > /etc/hostname
+#
+#echo "Setting up Xorg drivers"
+#confirm "Do you want to install the Intel driver" && pacman -S --noconfirm mesa xf86-video-intel
+#confirm "Do you want to install the AMD driver" && pacman -S --noconfirm mesa xf86-video-amdgpu
+#confirm "Do you want to install the NVIDIA driver" && pacman -S --noconfirm nvidia nvidia-utils
 
 echo "Installing main packages"
 INSTALL_DIR="$ROOT_DIR"/packages
