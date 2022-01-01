@@ -2,8 +2,6 @@
 
 set -ex
 
-ROOT_DIR=~/bayo-arch
-
 confirm() {
 
   local _prompt _response
@@ -27,14 +25,8 @@ confirm() {
   done
 }
 
-token="$1"
-
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIR="$SCRIPT_DIR"/..
-
-mkdir -p "$ROOT_DIR"/installdir
-
-INSTALL_DIR="$ROOT_DIR"/installdir
+ROOT_DIR="$SCRIPT_DIR"/../../
 
 read -r -p "Enter computer name: " hostname
 read -r -p "Enter a new user name: " username
@@ -92,12 +84,12 @@ confirm "Do you want to install the AMD driver" && pacman -S --noconfirm mesa xf
 confirm "Do you want to install the NVIDIA driver" && pacman -S --noconfirm nvidia nvidia-utils
 
 echo "Installing main packages"
-curl https://"$token"@raw.githubusercontent.com/stev94/myi3config/master/new/pacmanlist.txt -o "$INSTALL_DIR"/pacmanlist.txt
+INSTALL_DIR="$ROOT_DIR"/packages
 pacman -Syyu
 grep -v "#" "$INSTALL_DIR"/pacmanlist.txt | pacman -S --noconfirm -
 
-#echo "Installing cronjobs"
-##bash "$ROOT_DIR"/src/add-cronjobs.sh
+echo "Installing cronjobs"
+bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
 
 echo "Setting up coloring in pacman"
 sed --in-place=.bak 's/^#COLOR/COLOR/' /etc/pacman.conf
@@ -131,7 +123,7 @@ systemctl mask systemd-rfkill.socket
 # SETTING ROOT ZSH #
 ####################
 mkdir -p /etc/zsh
-cp -r "$ROOT_DIR"/new/configs/zsh/etc /etc/zsh
+cp -r "$ROOT_DIR"/configs/zsh/etc /etc/zsh
 
 ###################
 ## SWITCHING USER #
@@ -140,14 +132,14 @@ echo "Login with $username user"
 su - "$username"
 su "$username" <<EOF
 
-  ROOT_DIR=~/bayo-arch
+  ROOT_DIR=/root/bayo-arch
 
   echo "Creates default folders (e.g. music)"
-  cp "$ROOT_DIR"/new/configs/user-dirs.dirs .config/
+  cp "$ROOT_DIR"/configs/user-dirs.dirs ~/.config/
   xdg-user-dirs-update
 
   echo "Installing yay"
-  cd packages
+  cd ~/packages
   git clone https://aur.archlinux.org/yay.git
   sudo chown -R "$username":users ./yay
   cd yay
@@ -157,17 +149,17 @@ su "$username" <<EOF
   # Setting i3 #
   ##############
   cd ~/.config
-  cp -r "$ROOT_DIR"/new/configs/i3 .
+  cp -r "$ROOT_DIR"/configs/i3 .
 
-  cp -r "$ROOT_DIR"/new/configs/conky .
+  cp -r "$ROOT_DIR"/configs/conky .
   chmod +x conky/calendar.lua
   chmod +x conky/weather.lua
   chmod +x conky/moonphase.lua
 
-  cp -r "$ROOT_DIR"/new/configs/dunst .
+  cp -r "$ROOT_DIR"/configs/dunst .
   chmod +x dunst/alert.sh
 
-  cp "$ROOT_DIR"/new/configs/Xresources .Xresources
+  cp "$ROOT_DIR"/configs/.Xresources .Xresources
   xrdb .Xresources
 
   # copy configs
