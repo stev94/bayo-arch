@@ -5,5 +5,5 @@ This is my custom implementation of Arch running i3wm.
 ## Install
 
 ```console
-make build-arch
+make install
 ```

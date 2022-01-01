@@ -66,6 +66,7 @@ system-config-printer
 spacefm
 gnome-keyring
 zsh
+libxkbcommon
 # for copying into the clipboard
 xsel
 

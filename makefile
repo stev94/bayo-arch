@@ -10,8 +10,8 @@ help:							## Show this help
 refresh-pacman-list: 				## Refresh mirror list
 	@pacman -Syyu
 
-.PHONY: build-arch
-build-arch:							## Build arch-i3
+.PHONY: install
+install:							## Install arch-i3
 	@echo "Welcome to bayo-arch :D. Starting building..."
 	@cd $(CURDIR)/bin/build-arch && sh install.sh
 
