@@ -13,9 +13,9 @@ refresh-pacman-list: 				## Refresh mirror list
 .PHONY: build-arch
 build-arch:							## Build arch-i3
 	@echo "Welcome to bayo-arch :D. Starting building..."
-	@cd $(CUR_DIR)/bin/build-arch && sh install.sh
+	@cd $(CURDIR)/bin/build-arch && sh install.sh
 
 .PHONY: backup-arch
 backup-arch: 						## Backup arch-i3
 	@echo "Welcome to backup-bayo-arch :D. Starting backing up..."
-	@cd $(CUR_DIR)/bin/backup-arch && sh backup.sh
+	@cd $(CURDIR)/bin/backup-arch && sh backup.sh
