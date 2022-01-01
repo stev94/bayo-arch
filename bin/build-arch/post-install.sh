@@ -41,7 +41,7 @@ sed --in-place=.bak 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoe
 passwd "$username"
 
 echo "Installing the GRUB bootloader"
-pacman -S --noconfirm grub
+pacman -S --noconfirm grub libxkbcommon
 if [ -d /sys/firmware/efi ]; then
   grub-install --target=x86_64-efi --efi-directory=/mnt/boot --bootloader-id=GRUB
 else
