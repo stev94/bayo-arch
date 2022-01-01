@@ -132,7 +132,7 @@ bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
 ## SWITCHING USER #
 ###################
 echo "Login with $username user"
-su "$username" <<EOF
+su "$username" --preserve-environment <<EOF
 
   ROOT_DIR=/root/bayo-arch
 

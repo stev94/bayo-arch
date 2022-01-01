@@ -65,6 +65,7 @@ simple-scan
 system-config-printer
 gnome-keyring
 zsh
+linux-headers
 # for copying into the clipboard
 xsel
 
