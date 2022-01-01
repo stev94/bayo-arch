@@ -28,52 +28,52 @@ confirm() {
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIR="$SCRIPT_DIR"/../../
 
-read -r -p "Enter computer name: " hostname
-read -r -p "Enter a new user name: " username
-
-echo "Setting the root password"
-passwd
-
-echo "Creating user"
-useradd -m -G wheel -s /bin/bash "$username"
-usermod --append --groups wheel "$username"
-sed --in-place=.bak 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
-passwd "$username"
-
-echo "Installing the GRUB bootloader"
-pacman -S --noconfirm grub libxkbcommon
-if [ -d /sys/firmware/efi ]; then
-  grub-install --target=x86_64-efi --efi-directory=/mnt/boot --bootloader-id=GRUB
-else
-  lsblk
-  read -r -p "Enter boot disk name (e.g. /dev/sdX): " bootdevice
-  grub-install --target=i386-pc "$bootdevice"
-fi
-mkdir -p /boot/grub
-grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "Setting the timezone"
-ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
-hwclock --systohc
-
-echo "Setting locale"
-sed --in-place=.bak -e 's/^#en_US\.UTF-8/en_US\.UTF-8/' -e 's/^#it_IT\.UTF-8/it_IT\.UTF-8/' /etc/locale.gen
-locale-gen
-cat << EOF > /etc/locale.conf
-LANG=en_US.UTF-8
-LC_ADDRESS=it_IT.UTF-8
-LC_IDENTIFICATION=it_IT.UTF-8
-LC_MEASUREMENT=it_IT.UTF-8
-LC_MONETARY=it_IT.UTF-8
-LC_NAME=it_IT.UTF-8
-LC_NUMERIC=it_IT.UTF-8
-LC_PAPER=it_IT.UTF-8
-LC_TELEPHONE=it_IT.UTF-8
-LC_TIME=it_IT.UTF-8
-EOF
-echo "KEYMAP=it" > /etc/vconsole.conf
-sed --in-place=.bak 's/^HOOKS.*/HOOKS=\(base udev autodetect modconf block filesystems keyboard fsck keymap\)/' /etc/mkinitcpio.conf
-localectl set-x11-keymap it
+#read -r -p "Enter computer name: " hostname
+#read -r -p "Enter a new user name: " username
+#
+#echo "Setting the root password"
+#passwd
+#
+#echo "Creating user"
+#useradd -m -G wheel -s /bin/bash "$username"
+#usermod --append --groups wheel "$username"
+#sed --in-place=.bak 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+#passwd "$username"
+#
+#echo "Installing the GRUB bootloader"
+#pacman -S --noconfirm grub libxkbcommon
+#if [ -d /sys/firmware/efi ]; then
+#  grub-install --target=x86_64-efi --efi-directory=/mnt/boot --bootloader-id=GRUB
+#else
+#  lsblk
+#  read -r -p "Enter boot disk name (e.g. /dev/sdX): " bootdevice
+#  grub-install --target=i386-pc "$bootdevice"
+#fi
+#mkdir -p /boot/grub
+#grub-mkconfig -o /boot/grub/grub.cfg
+#
+#echo "Setting the timezone"
+#ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
+#hwclock --systohc
+#
+#echo "Setting locale"
+#sed --in-place=.bak -e 's/^#en_US\.UTF-8/en_US\.UTF-8/' -e 's/^#it_IT\.UTF-8/it_IT\.UTF-8/' /etc/locale.gen
+#locale-gen
+#cat << EOF > /etc/locale.conf
+#LANG=en_US.UTF-8
+#LC_ADDRESS=it_IT.UTF-8
+#LC_IDENTIFICATION=it_IT.UTF-8
+#LC_MEASUREMENT=it_IT.UTF-8
+#LC_MONETARY=it_IT.UTF-8
+#LC_NAME=it_IT.UTF-8
+#LC_NUMERIC=it_IT.UTF-8
+#LC_PAPER=it_IT.UTF-8
+#LC_TELEPHONE=it_IT.UTF-8
+#LC_TIME=it_IT.UTF-8
+#EOF
+#echo "KEYMAP=it" > /etc/vconsole.conf
+##sed --in-place=.bak 's/^HOOKS.*/HOOKS=\(base udev autodetect modconf block filesystems keyboard fsck keymap\)/' /etc/mkinitcpio.conf
+localectl set-keymap it
 
 echo "Configuring hostname"
 echo "$hostname" > /etc/hostname
