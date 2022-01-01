@@ -142,7 +142,7 @@ su "$username" <<EOF
   git clone https://aur.archlinux.org/yay.git
   sudo chown -R "$username":users ./yay
   cd yay
-  makepkg -si
+  makepkg -si --noconfirm
 
   echo "Installing cronjobs"
   bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
