@@ -88,9 +88,6 @@ ROOT_DIR="$CURR_DIR"/../..
 #pacman -Syyu
 #grep -v "#" "$INSTALL_DIR"/pacmanlist.txt | pacman -S --noconfirm -
 
-echo "Installing cronjobs"
-bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
-
 echo "Setting up coloring in pacman"
 sed --in-place=.bak 's/^#COLOR/COLOR/' /etc/pacman.conf
 
@@ -112,7 +109,7 @@ systemctl enable sshd
 systemctl enable dhcpcd
 systemctl enable NetworkManager
 systemctl enable bluetooth
-
+systemctl enable cronie.service
 systemctl enable tlp.service
 systemctl enable NetworkManager-dispatcher.service
 # mask to avoid conflicts
@@ -144,6 +141,9 @@ su "$username" <<EOF
   sudo chown -R "$username":users ./yay
   cd yay
   makepkg -si
+
+  echo "Installing cronjobs"
+  bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
 
   ##############
   # Setting i3 #
