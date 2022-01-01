@@ -52,8 +52,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 echo "Executing post-init script"
-curl https://raw.githubusercontent.com/stev94/myi3config/main/new/post-install.sh > /mnt/root/post-install.sh
-arch-chroot /mnt "/bin/bash" "/root/post-install.sh"
+arch-chroot /mnt "/bin/bash" "post-install.sh"
 
 umount -R /mnt
 
