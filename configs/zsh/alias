@@ -1,0 +1,97 @@
+#!/usr/bin/env zsh
+
+###########
+# GENERAL #
+###########
+alias sudo='sudo '
+alias pm='sudo pacman '
+
+alias cd..='cd ..'
+alias cdd='cd ~'
+
+alias cta='cat'
+
+alias ll="ls -lah -S --classify"
+
+alias grep='grep --colour=auto '
+alias egrep='grep -E --colour=auto '
+alias fgrep='fgrep --colour=auto '
+
+# shellcheck disable=SC2142
+alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | grep -E ^/dev/ | sort"
+
+alias gh='history|grep'
+
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+# single letter
+alias q='exit'
+alias c='clear'
+alias h='history'
+alias t='time'
+alias d='date'
+alias k='kill '
+alias o='xdg-open '
+
+##########
+# COMMON #
+##########
+alias rm='rmtrash'
+alias rmdir='rmdirtrash'
+
+alias vi='vim '
+
+alias ve='python -m venv ./venv'
+alias va='source ./venv/bin/activate'
+
+alias idea='intellij-idea-ultimate .'
+alias py='pycharm-professional .'
+
+alias dock='docker '
+
+# copy to clipboard
+alias cpy='xsel --clipboard --input'
+alias cpyf='copy_clipboard_from_file'
+
+###############
+# DIRECTORIES #
+###############
+alias home='cd ~'
+alias root='cd /'
+
+alias ..='cd ..'
+alias ...='cd ..; cd ..'
+alias ....='cd ..; cd ..; cd ..'
+
+#######
+# GIT #
+#######
+alias g='git'
+alias gcom='git commit -m'
+alias gclone='git clone'
+
+##########
+# AKAMAS #
+##########
+alias ak='akamas '
+alias akaas='akamas '
+
+##############
+# KUBERNETES #
+##############
+alias eks='eksctl '
+
+alias kube='kubectl '
+alias kget='kubectl get '
+alias kdescr='kubectl kdescr '
+alias kroll='kubectl argo rollouts '
+
+alias dockrun='docker run -it '
+
+##########
+# OTHERS #
+##########
+alias vimrc='vim ~/.vimrc'
+alias bashrc='vim ~/.bashrc'
+alias loadbash='source ~/.bashrc'

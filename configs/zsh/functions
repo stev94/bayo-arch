@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+# cd and ls together
+function cl() {
+    DIR="$*";
+        # if no DIR given, go home
+    if [ $# -lt 1 ]; then
+         ls -F --color=auto
+         #       DIR=$HOME;
+    else
+        builtin cd "${DIR}" && \
+        # use your preferred ls command
+            ls -F --color=auto
+    fi;
+}
+
+
+# copy content of a file in the clipboard
+copy_clipboard_from_file() {
+  # shellcheck disable=SC2002  # (not true)
+  cat "$1" | xsel --clipboard --input;
+}
+

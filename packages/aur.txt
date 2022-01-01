@@ -1,0 +1,22 @@
+docker-bin
+remmina-git
+slack-desktop
+visual-studio-code-bin
+
+rmtrash
+i3-get-window-criteria
+glow
+skypeforlinux-preview-bin
+whatsapp-for-linux
+
+spotify
+
+chroma
+
+gitflow-avh
+
+lua-luajson
+
+# fonts
+ttf-symbola
+

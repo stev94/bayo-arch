@@ -1,0 +1,119 @@
+# monitoring
+atop
+htop
+powertop
+conky
+
+# devices
+blueman
+bluez
+bluez-utils
+
+# networking
+dhcpcd
+networkmanager
+network-manager-applet
+openssh
+
+# development
+git
+go
+python
+
+# display
+i3-gaps
+i3status
+i3lock
+i3exit
+py3status
+xorg
+xorg-xinit
+lightdm
+lightdm-gtk-greeter
+lightdm-gtk-greeter-settings
+alacritty
+rofi
+dex
+xss-lock
+gtk2
+gtk3
+gtk-engines
+gtk-engine-murrine
+# adapta-gtk-theme
+# papirus-icon-theme
+
+# programming languages
+lua
+lua-socket
+jre-openjdk
+
+# utilities
+make
+pkgstats
+tldr
+thefuck
+unzip
+vim
+zip
+wget
+gparted
+xdg-user-dirs
+which
+mousepad
+sudo
+simple-scan
+system-config-printer
+spacefm
+gnome-keyring
+zsh
+# for copying into the clipboard
+xsel
+
+# display image in terminal
+imagemagick
+
+# sound
+alsa-utils
+pipewire
+playerctl
+
+# applications
+telegram-desktop
+
+# notifications
+dunst
+
+# battery-saving
+tlp
+tlp-rdw
+acpi
+xfce4-power-manager
+
+# media
+vlc
+
+## look&feel
+feh
+lxappearance
+picom
+
+# others
+virtualbox
+
+# fonts
+ttf-dejavu
+ttf-roboto
+ttf-font-awesome
+ttf-freefont
+ttf-liberation
+ttf-droid
+ttf-inconsolata
+ttf-ubuntu-font-family
+ttf-fira-sans
+noto-fonts
+terminus-font
+
+# stupid
+sl
+fortune-mod
+cowsay

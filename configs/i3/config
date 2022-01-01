@@ -1,0 +1,152 @@
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+########################################################################
+#                         i3 SETTINGS                                  #
+########################################################################
+
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+########################################################################
+#                           COLORS AND FONTS                           #
+########################################################################
+
+### FONT ###
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:Noto Sans 14px
+
+# print all window titles bold
+for_window [class=".*"] title_format "<b>%title</b>"
+
+### COLORS ###
+
+# Color palette used for the terminal ( ~/.Xresources file )
+# Colors are gathered based on the documentation:
+# https://i3wm.org/docs/userguide.html#xresources
+# Change the variable name at the place you want to match the color
+# of your terminal like this:
+# [example]
+# If you want your bar to have the same background color as your
+# terminal background change the line 362 from:
+# background #14191D
+# to:
+# background $term_background
+# Same logic applied to everything else.
+#                 i3-variable                         Xresource-variable
+set_from_resource $term_color_black_dark              color0
+set_from_resource $term_color_black_light             color8
+set_from_resource $term_color_red_dark                color1
+set_from_resource $term_color_red_light               color9
+set_from_resource $term_color_green_dark              color2
+set_from_resource $term_color_green_light             color10
+set_from_resource $term_color_yellow_dark             color3
+set_from_resource $term_color_yellow_light            color11
+set_from_resource $term_color_blue_dark               color4
+set_from_resource $term_color_blue_light              color12
+set_from_resource $term_color_magenta_dark            color5
+set_from_resource $term_color_magenta_light           color13
+set_from_resource $term_color_cyan_dark               color6
+set_from_resource $term_color_cyan_light              color14
+set_from_resource $term_color_white                   color7
+set_from_resource $term_color_grey_dark               color16
+set_from_resource $term_color_total_black_dark        color17
+set_from_resource $term_color_total_black_light       color18
+set_from_resource $term_color_total_black_transparent color19
+
+# class                 border                   backgr.                        text                          indic.                  child_border
+client.focused          $term_color_blue_dark    $term_color_blue_dark          $term_color_total_black_dark  $term_color_red_light   $term_color_blue_dark
+client.focused_inactive $term_color_black_dark   $term_color_black_dark         $term_color_white             $term_color_red_light   $term_color_black_dark
+client.unfocused        $term_color_black_light  $term_color_black_light        $term_color_white             $term_color_red_light   $term_color_black_light
+client.urgent           $term_color_red_dark     $term_color_red_dark           $term_color_total_black_dark  $term_color_cyan_light  $term_color_red_dark
+client.placeholder      $term_color_green_dark   $term_color_green_dark         $term_color_total_black_dark  $term_color_red_light   $term_color_green_dark
+client.background                                $term_color_total_black_light
+
+########################################################################
+#                              INCLUDES                                #
+########################################################################
+include ~/.config/i3/includes/workspace.conf
+include ~/.config/i3/includes/windows.conf
+include ~/.config/i3/includes/power-management.conf
+include ~/.config/i3/includes/i3-gaps.conf
+include ~/.config/i3/includes/applications.conf
+
+################################################################################################
+## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
+################################################################################################
+
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#exec --no-startup-id pulseaudio
+#exec --no-startup-id pa-applet
+#bindsym $mod+Ctrl+m exec pavucontrol
+
+################################################################################################
+
+
+########################################################################
+#                               BARS                                   #
+########################################################################
+
+# Start i3bar to display a workspace bar (plus the system information i3status if available)
+bar {
+
+    id default-bar
+
+	i3bar_command i3bar --transparency
+	status_command py3status -c ~/.config/i3/i3status.conf
+
+	# <top|bottom> (default bottom)
+	position top
+
+    # Before: please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+    # specify where to show the bar output <primary|nonprimary> (default all)
+    output primary
+    output nonprimary
+    # show icons in the right of the bar (e.g., nm, ...)
+	tray_output HDMI2
+    tray_output eDPI1
+    tray_padding 0
+
+    # scrolling workspaces on the bar
+    bindsym button4 workspace next_on_output
+    bindsym button5 workspace prev_on_output
+
+    # Take a screenshot by right clicking on the bar
+    bindsym --release button3 exec --no-startup-id "import -window root ~/media/pics/screenshots/\\"$(exec date -u +'%Y-%m-%dT%H:%M:%S')\\".png; notify-send \\"screenshot at ~/media/pics/screenshots/\\"$(date -u +'%Y-%m-%dT%H:%M:%S')\\".png\\""
+
+    # fonts
+	font pango:Noto Sans 14px
+#     separator_symbol ":|:"
+
+	strip_workspace_numbers yes
+
+    colors {
+
+        background $term_color_total_black_dark
+        statusline $term_color_cyan_light
+        separator  $term_color_grey_dark
+
+        #                  border                              background                          text
+        focused_workspace  $term_color_total_black_transparent $term_color_total_black_transparent $term_color_green_dark
+        active_workspace   $term_color_total_black_transparent $term_color_total_black_transparent $term_color_green_dark
+        inactive_workspace $term_color_total_black_transparent $term_color_total_black_transparent $term_color_grey_dark
+        binding_mode       $term_color_total_black_transparent $term_color_total_black_transparent $term_color_cyan_dark
+        urgent_workspace   $term_color_total_black_transparent $term_color_total_black_transparent $term_color_red_dark
+
+    }
+}
+
+# hide/show i3status bar
+bindsym $mod+Escape bar mode toggle
