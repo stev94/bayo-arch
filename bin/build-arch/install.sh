@@ -2,6 +2,9 @@
 
 set -ex
 
+CUR_DIR=$( dirname -- "${BASH_SOURCE[0]}" )
+echo "Current dir is $CUR_DIR"
+
 ##############
 # PARTITIONS #
 ##############
@@ -52,7 +55,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 echo "Executing post-init script"
-arch-chroot /mnt "/bin/bash" "post-install.sh"
+arch-chroot /mnt "/bin/bash" "$CUR_DIR/post-install.sh"
 
 umount -R /mnt
 
