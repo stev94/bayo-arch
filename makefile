@@ -10,10 +10,12 @@ help:							## Show this help
 refresh-pacman-list: 				## Refresh mirror list
 	@pacman -Syyu
 
-.PHONY: build-arch					## Build arch-i3
+.PHONY: build-arch
+build-arch:							## Build arch-i3
 	@echo "Welcome to bayo-arch :D. Starting building..."
 	@cd $(CUR_DIR)/src/build-arch && sh install.sh
 
-.PHONY: backup-arch					## Backup arch-i3
+.PHONY: backup-arch
+backup-arch: 						## Backup arch-i3
 	@echo "Welcome to backup-bayo-arch :D. Starting backing up..."
 	@cd $(CUR_DIR)/src/backup-arch && sh backup.sh

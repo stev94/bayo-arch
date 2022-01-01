@@ -2,7 +2,7 @@
 
 set -ex
 
-CUR_DIR=$( dirname -- "${BASH_SOURCE[0]}" )
+CUR_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo "Current dir is $CUR_DIR"
 
 ##############
