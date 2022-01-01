@@ -3,7 +3,7 @@
 set -ex
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIR="$SCRIPT_DIR"/../scripts/
+ROOT_DIR="$SCRIPT_DIR"/../../scripts/
 
 mkdir -p /usr/bin/cronjobs
 mv "$ROOT_DIR"/cronjobs/* /usr/bin/cronjobs/

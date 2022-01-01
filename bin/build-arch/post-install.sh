@@ -25,8 +25,8 @@ confirm() {
   done
 }
 
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIR="$SCRIPT_DIR"/../../
+CURR_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+ROOT_DIR="$CURR_DIR"/../../
 
 #read -r -p "Enter computer name: " hostname
 #read -r -p "Enter a new user name: " username
@@ -83,10 +83,10 @@ ROOT_DIR="$SCRIPT_DIR"/../../
 #confirm "Do you want to install the AMD driver" && pacman -S --noconfirm mesa xf86-video-amdgpu
 #confirm "Do you want to install the NVIDIA driver" && pacman -S --noconfirm nvidia nvidia-utils
 
-echo "Installing main packages"
-INSTALL_DIR="$ROOT_DIR"/packages
-pacman -Syyu
-grep -v "#" "$INSTALL_DIR"/pacmanlist.txt | pacman -S --noconfirm -
+#echo "Installing main packages"
+#INSTALL_DIR="$ROOT_DIR"/packages
+#pacman -Syyu
+#grep -v "#" "$INSTALL_DIR"/pacmanlist.txt | pacman -S --noconfirm -
 
 echo "Installing cronjobs"
 bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
