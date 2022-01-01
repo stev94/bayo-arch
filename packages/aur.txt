@@ -6,6 +6,7 @@ visual-studio-code-bin
 rmtrash
 i3-get-window-criteria
 i3exit
+spacefm
 glow
 skypeforlinux-preview-bin
 whatsapp-for-linux

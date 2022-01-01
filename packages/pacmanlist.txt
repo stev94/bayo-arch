@@ -62,7 +62,6 @@ mousepad
 sudo
 simple-scan
 system-config-printer
-spacefm
 gnome-keyring
 zsh
 # for copying into the clipboard
