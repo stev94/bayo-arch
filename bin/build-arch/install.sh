@@ -56,7 +56,7 @@ cat /mnt/etc/fstab
 
 echo "Executing post-init script"
 cp -r /root/bayo-arch /mnt/home
-arch-chroot /mnt /bin/bash /home/bayo-arch/bin/build-arch/post-install.sh
+arch-chroot /mnt /bin/bash /home/bayo-arch/bin/build-arch/post-install.sh > install.logs
 
 umount -R /mnt
 

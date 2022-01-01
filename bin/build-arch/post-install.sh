@@ -119,8 +119,8 @@ systemctl mask systemd-rfkill.socket
 ####################
 # SETTING ROOT ZSH #
 ####################
-mkdir -p /etc/zsh
-cp -r "$ROOT_DIR"/configs/zsh/etc /etc/zsh
+#mkdir -p /etc/zsh
+#cp -r "$ROOT_DIR"/configs/zsh/etc /etc/zsh
 
 #################
 ## ADD CRONJOBS #
@@ -171,14 +171,11 @@ su "$username" <<EOF
   cp "$ROOT_DIR"/configs/.pam_environment ~/.pam_environment
 
   # install oh-y-zsh
-  ZSH=~/.config/zsh/oh-my-zsh sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh --unattended)"
-  mkdir -p ~/.config/zsh
-  cp "$ROOT_DIR"/configs/.* ~/.config/zsh/
-  cp "$ROOT_DIR"/configs/zsh/zsh-theme ~/.config/zsh/oh-my-zsh/custom/bayo-theme
+  bash set-zsh.sh
 
   # Setting background image
   cp -r "$ROOT_DIR"/data/media/wallpapers ~/media/pics/
-  feh --bg-scale
+  feh --bg-scale ~/media/pics/wallpapers/universe.jpg
   echo "~/.fehbg &" >> ~/.config/zsh/.zshrc
 
 EOF
