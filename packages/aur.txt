@@ -16,6 +16,7 @@ spotify
 chroma
 
 gitflow-avh
+jetbrains-toolbox
 
 lua-luajson
 

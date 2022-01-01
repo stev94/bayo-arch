@@ -176,7 +176,6 @@ su "$username" <<EOF
   # Setting background image
   cp -r "$ROOT_DIR"/data/media/wallpapers ~/media/pics/
   feh --bg-scale ~/media/pics/wallpapers/universe.jpg
-  echo "~/.fehbg &" >> ~/.config/zsh/.zshrc
 
 EOF
 
