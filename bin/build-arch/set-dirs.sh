@@ -15,6 +15,3 @@ mkdir -p packages
 mkdir -p public
 
 rm -rf Desktop Documents Music Downloads Pictures Public Videos Templates
-
-cp "$ROOT_DIR"/configs/user-dirs.dirs ~/.config/
-#  xdg-user-dirs-update

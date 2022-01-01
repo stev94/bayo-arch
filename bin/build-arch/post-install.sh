@@ -132,7 +132,9 @@ su "$username" <<EOF
 
   ROOT_DIR=/root/bayo-arch
 
-  echo "Creates default folders (e.g. music)"
+  echo "Creating default folders"
+  cp "$ROOT_DIR"/configs/user-dirs.dirs ~/.config/
+#  xdg-user-dirs-update
   bash "$ROOT_DIR"/bin/build-arch/set-dirs.sh
 
   echo "Installing yay"
