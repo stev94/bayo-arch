@@ -134,7 +134,7 @@ su "$username" <<EOF
 
   echo "Creating default folders"
   cp "$ROOT_DIR"/configs/user-dirs.dirs ~/.config/
-#  xdg-user-dirs-update
+##  xdg-user-dirs-update
   bash "$ROOT_DIR"/bin/build-arch/set-dirs.sh
 
   echo "Installing yay"
