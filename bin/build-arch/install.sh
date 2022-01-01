@@ -5,7 +5,6 @@ set -ex
 CUR_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo "Current dir is $CUR_DIR"
 
-exit 1
 ##############
 # PARTITIONS #
 ##############
