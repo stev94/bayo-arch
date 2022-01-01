@@ -128,7 +128,6 @@ hostname=egle-arch
 ## SWITCHING USER #
 ###################
 echo "Login with $username user"
-su - "$username"
 su "$username" <<EOF
 
   ROOT_DIR=/root/bayo-arch
