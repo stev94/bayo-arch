@@ -55,7 +55,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 echo "Executing post-init script"
-arch-chroot /mnt "/bin/bash" "$CUR_DIR/post-install.sh"
+cd "$CUR_DIR"
+arch-chroot /mnt /bin/bash post-install.sh
 
 umount -R /mnt
 
