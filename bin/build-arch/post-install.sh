@@ -174,6 +174,9 @@ su "$username" <<EOF
 
   # Copying background image
   cp -r "$ROOT_DIR"/data/media/wallpapers ~/media/pics/
+
+  # install grub theme
+  bash "$ROOT_DIR"/bin/build-arch/install-grub-theme.sh
 EOF
 
 #echo "Setting theme"
