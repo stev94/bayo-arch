@@ -163,7 +163,6 @@ su "$username" <<EOF
   chmod +x dunst/alert.sh
 
   cp "$ROOT_DIR"/configs/.Xresources .Xresources
-  xrdb .Xresources
 
   # copy configs
   cp "$ROOT_DIR"/configs/.profile ~/.profile
@@ -171,12 +170,10 @@ su "$username" <<EOF
   cp "$ROOT_DIR"/configs/.pam_environment ~/.pam_environment
 
   # install oh-y-zsh
-  bash set-zsh.sh
+  bash "$ROOT_DIR"/bin/build-arch/set-zsh.sh
 
-  # Setting background image
+  # Copying background image
   cp -r "$ROOT_DIR"/data/media/wallpapers ~/media/pics/
-  feh --bg-scale ~/media/pics/wallpapers/universe.jpg
-
 EOF
 
 #echo "Setting theme"

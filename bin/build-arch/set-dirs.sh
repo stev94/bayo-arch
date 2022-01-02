@@ -13,6 +13,5 @@ mkdir -p ~/notes
 mkdir -p ~/work
 mkdir -p ~/packages
 mkdir -p ~/public
-mkdir -p ~/.config
 
 rm -rf ~/Desktop ~/Documents ~/Music ~/Downloads ~/Pictures ~/Public ~/Videos ~/Templates
