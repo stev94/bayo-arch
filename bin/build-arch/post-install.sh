@@ -147,6 +147,7 @@ su "$username" <<EOF
   sudo chown -R "$username":users ./yay
   cd yay
   makepkg -si --noconfirm
+  grep -v "#" "$INSTALL_DIR"/aur.txt | yay -S --noconfirm -
 
   ##############
   # Setting i3 #
@@ -155,19 +156,17 @@ su "$username" <<EOF
   cp -r "$ROOT_DIR"/configs/i3 .
 
   cp -r "$ROOT_DIR"/configs/conky .
-  chmod +x conky/calendar.lua
-  chmod +x conky/weather.lua
-  chmod +x conky/moonphase.lua
+  chmod +x conky/*.lua
 
   cp -r "$ROOT_DIR"/configs/dunst .
   chmod +x dunst/alert.sh
 
-  cp "$ROOT_DIR"/configs/.Xresources .Xresources
+  cp "$ROOT_DIR"/configs/.Xresources ~/
 
   # copy configs
-  cp "$ROOT_DIR"/configs/.profile ~/.profile
-  cp "$ROOT_DIR"/configs/.xinitrc ~/.xinitrc
-  cp "$ROOT_DIR"/configs/.pam_environment ~/.pam_environment
+  cp "$ROOT_DIR"/configs/.profile ~/
+  cp "$ROOT_DIR"/configs/.xinitrc ~/
+  cp "$ROOT_DIR"/configs/.pam_environment ~/
 
   # install oh-y-zsh
   bash "$ROOT_DIR"/bin/build-arch/set-zsh.sh

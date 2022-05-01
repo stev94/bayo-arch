@@ -148,9 +148,7 @@ alias less='cless'
 ###########
 source ~/.config/zsh/alias
 source ~/.config/zsh/functions
-
-
-
+source ~/.config/zsh/bayo.zsh-theme
 
 ####################
 # UNUSED OH-MY-ZSH #

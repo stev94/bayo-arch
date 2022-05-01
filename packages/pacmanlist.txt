@@ -1,5 +1,6 @@
 # monitoring
 atop
+btop
 htop
 powertop
 conky
@@ -30,7 +31,7 @@ xorg-xinit
 lightdm
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
-alacritty
+
 rofi
 dex
 xss-lock
@@ -68,12 +69,19 @@ zsh
 linux-headers
 # for copying into the clipboard
 xsel
+nfs-utils
+dialog
+autofs
 
 # display image in terminal
 imagemagick
 
 # sound
 alsa-utils
+alsa-firmware
+alsa-lib
+alsa-plugins
+
 pipewire
 playerctl
 

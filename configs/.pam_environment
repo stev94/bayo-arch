@@ -1,2 +1,0 @@
-# Run before login into the shell
-export ZDOTDIR=$HOME/.config/zsh

@@ -9,6 +9,7 @@ alias pm='sudo pacman '
 alias cd..='cd ..'
 alias cdd='cd ~'
 
+alias cat='cat '
 alias cta='cat'
 
 alias ll="ls -lah -S --classify"
