@@ -28,6 +28,11 @@ confirm() {
 CURR_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIR="$CURR_DIR"/../..
 
+# To update the mirror and sorts it by download speed
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+pacman -S --noconfirm reflector
+reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
+
 read -r -p "Enter computer name: " hostname
 read -r -p "Enter a new user name: " username
 

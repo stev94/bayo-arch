@@ -43,11 +43,6 @@ timedatectl status
 
 echo "Check Mirror list"
 pacman -Syy
-# To update the mirror and sorts it by download speed
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-pacman -S --noconfirm archlinux-keyring reflector
-reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
-
 echo "Installing base packages (base, linux, linux-firmware)"
 pacstrap /mnt base base-devel linux linux-firmware
 
