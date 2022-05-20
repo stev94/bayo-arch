@@ -28,11 +28,6 @@ confirm() {
 CURR_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIR="$CURR_DIR"/../..
 
-# To update the mirror and sorts it by download speed
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-pacman -S --noconfirm reflector
-reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
-
 read -r -p "Enter computer name: " hostname
 read -r -p "Enter a new user name: " username
 
@@ -82,6 +77,11 @@ localectl set-keymap it
 
 echo "Configuring hostname"
 echo "$hostname" > /etc/hostname
+
+# To update the mirror and sorts it by download speed
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+pacman -S --noconfirm archlinux-keyring reflector
+reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 
 echo "Setting up Xorg drivers"
 confirm "Do you want to install the Intel driver" && pacman -S --noconfirm mesa xf86-video-intel
