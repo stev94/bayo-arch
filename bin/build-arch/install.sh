@@ -23,7 +23,7 @@ else
 fi
 sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:swap "$disk"
 sgdisk -n 0:0:0 -t 0:8300 -c 0:root "$disk"
-partprobe
+partprobe "$disk"
 lsblk
 
 echo "Formatting partitions"
