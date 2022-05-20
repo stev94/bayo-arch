@@ -23,6 +23,7 @@ else
 fi
 sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:swap "$disk"
 sgdisk -n 0:0:0 -t 0:8300 -c 0:root "$disk"
+partprobe
 lsblk
 
 echo "Formatting partitions"
@@ -44,7 +45,7 @@ echo "Check Mirror list"
 pacman -Syy
 # To update the mirror and sorts it by download speed
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-pacman -S --noconfirm reflector
+pacman -S --noconfirm archlinux-keyring reflector
 reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 
 echo "Installing base packages (base, linux, linux-firmware)"
