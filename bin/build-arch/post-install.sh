@@ -37,24 +37,28 @@ passwd
 echo "Creating user"
 useradd -m -G wheel -s /bin/bash "$username"
 usermod --append --groups wheel "$username"
-sed --in-place=.bak 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+sed --in-place=.bak 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 passwd "$username"
 
 echo "Installing the GRUB bootloader"
-pacman -S --noconfirm grub libxkbcommon efibootmgr
+read -r -p "Enter boot disk name (e.g. /dev/sdX): " bootdevice
+pacman -S grub efibootmgr dosfstools os-prober mtools
+#pacman -S --noconfirm grub libxkbcommon efibootmgr
 if [ -d /sys/firmware/efi ]; then
-  grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+  mkdir /boot/EFI
+  mount "$bootdevice"1 /boot/EFI  #Mount FAT32 EFI partition
+  grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
 else
   lsblk
   read -r -p "Enter boot disk name (e.g. /dev/sdX): " bootdevice
   grub-install --target=i386-pc "$bootdevice"
 fi
-mkdir -p /boot/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "Setting the timezone"
-ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
-hwclock --systohc
+read -r -p "Enter the timezone in the format Time/Zone: " timezone
+timedatectl set-timezone "$timezone"
+#ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
+#hwclock --systohc
 
 echo "Setting locale"
 sed --in-place=.bak -e 's/^#en_US\.UTF-8/en_US\.UTF-8/' -e 's/^#it_IT\.UTF-8/it_IT\.UTF-8/' /etc/locale.gen
@@ -72,16 +76,10 @@ LC_TELEPHONE=it_IT.UTF-8
 LC_TIME=it_IT.UTF-8
 EOF
 echo "KEYMAP=it" > /etc/vconsole.conf
-#sed --in-place=.bak 's/^HOOKS.*/HOOKS=\(base udev autodetect modconf block filesystems keyboard fsck keymap\)/' /etc/mkinitcpio.conf
 localectl set-keymap it
 
 echo "Configuring hostname"
 echo "$hostname" > /etc/hostname
-
-# To update the mirror and sorts it by download speed
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-pacman -S --noconfirm archlinux-keyring reflector
-reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 
 echo "Setting up Xorg drivers"
 confirm "Do you want to install the Intel driver" && pacman -S --noconfirm mesa xf86-video-intel

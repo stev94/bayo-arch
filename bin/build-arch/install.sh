@@ -5,6 +5,13 @@ set -ex
 CUR_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo "Current dir is $CUR_DIR"
 
+########
+# TIME #
+########
+# enable Network Time Protocols (NTP) and allow the system to update the time via the Internet
+timedatectl set-ntp true
+timedatectl status
+
 ##############
 # PARTITIONS #
 ##############
@@ -15,10 +22,8 @@ read -r -p "Enter the disk to partition: (e.g. /dev/sda): " disk
 if [ -d /sys/firmware/efi ]; then
   sgdisk -n 0:0:+512MiB -t 0:ef00 -c 0:efi "$disk"
   mkfs.fat -F32 "$disk"1
-  mkdir /mnt/boot
-  mount "$disk"1 /mnt/boot
 else
-  # if not UEFI system create boot partition
+  # if not UEFI system create boot partition (code ef02)
   sgdisk -n 0:0:+512MiB -t 0:ef02 -c 0:efi "$disk"
 fi
 sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:swap "$disk"
@@ -37,12 +42,11 @@ swapon "$disk"2
 ###############
 # CONF SYSTEM #
 ###############
-echo "Updating the system clock"
-timedatectl set-ntp true
-timedatectl status
-
 echo "Check Mirror list"
-pacman -Syy
+pacman -Syy   # synch repositories
+pacman -S reflector
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 echo "Installing base packages (base, linux, linux-firmware)"
 pacstrap /mnt base base-devel linux linux-firmware
 
