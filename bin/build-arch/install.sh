@@ -44,11 +44,11 @@ swapon "$disk"2
 ###############
 echo "Check Mirror list"
 pacman -Syy   # synch repositories
+echo "Installing base packages (base, linux, linux-firmware)"
+pacstrap /mnt base base-devel linux linux-firmware
 pacman -S reflector
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "IT" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
-echo "Installing base packages (base, linux, linux-firmware)"
-pacstrap /mnt base base-devel linux linux-firmware
 
 echo "Configuring the system"
 genfstab -U /mnt >> /mnt/etc/fstab
