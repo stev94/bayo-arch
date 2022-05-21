@@ -71,7 +71,6 @@ linux-headers
 xsel
 nfs-utils
 dialog
-autofs
 
 # display image in terminal
 imagemagick

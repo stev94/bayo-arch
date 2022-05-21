@@ -1,8 +1,6 @@
-docker-bin
 remmina-git
 slack-desktop
 visual-studio-code-bin
-
 rmtrash
 i3-get-window-criteria
 i3exit
@@ -10,16 +8,10 @@ spacefm
 glow
 skypeforlinux-preview-bin
 whatsapp-for-linux
-
 spotify
-
 chroma
-
 gitflow-avh
 jetbrains-toolbox
-
 lua-luajson
-
 # fonts
 ttf-symbola
-

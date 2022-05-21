@@ -41,9 +41,9 @@ sed --in-place=.bak 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoe
 passwd "$username"
 
 echo "Installing the GRUB bootloader"
-pacman -S --noconfirm grub libxkbcommon
+pacman -S --noconfirm grub libxkbcommon efibootmgr
 if [ -d /sys/firmware/efi ]; then
-  grub-install --target=x86_64-efi --efi-directory=/mnt/boot --bootloader-id=GRUB
+  grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 else
   lsblk
   read -r -p "Enter boot disk name (e.g. /dev/sdX): " bootdevice
@@ -139,9 +139,10 @@ bash "$ROOT_DIR"/bin/build-arch/add-cronjobs.sh
 echo "Login with $username user"
 su "$username" <<EOF
 
-  ROOT_DIR=/root/bayo-arch
+  ROOT_DIR=/home/bayo-arch
 
   echo "Creating default folders"
+  mkdir -p ~/.config
   cp "$ROOT_DIR"/configs/user-dirs.dirs ~/.config/
   ##  xdg-user-dirs-update
   bash "$ROOT_DIR"/bin/build-arch/set-dirs.sh
@@ -166,12 +167,10 @@ su "$username" <<EOF
   cp -r "$ROOT_DIR"/configs/dunst .
   chmod +x dunst/alert.sh
 
-  cp "$ROOT_DIR"/configs/.Xresources ~/
-
   # copy configs
-  cp "$ROOT_DIR"/configs/.profile ~/
-  cp "$ROOT_DIR"/configs/.xinitrc ~/
-  cp "$ROOT_DIR"/configs/.pam_environment ~/
+  cp "$ROOT_DIR"/configs/home/.Xresources ~/
+  cp "$ROOT_DIR"/configs/home/.profile ~/
+  cp "$ROOT_DIR"/configs/home/.xinitrc ~/
 
   # install oh-y-zsh
   bash "$ROOT_DIR"/bin/build-arch/set-zsh.sh
