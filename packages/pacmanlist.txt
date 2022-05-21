@@ -19,7 +19,7 @@ openssh
 # development
 git
 go
-python
+python-pip
 
 # display
 i3-gaps
