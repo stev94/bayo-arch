@@ -42,8 +42,7 @@ passwd "$username"
 
 echo "Installing the GRUB bootloader"
 read -r -p "Enter boot disk name (e.g. /dev/sdX): " bootdevice
-pacman -S grub efibootmgr dosfstools os-prober mtools
-#pacman -S --noconfirm grub libxkbcommon efibootmgr
+pacman -S grub efibootmgr dosfstools os-prober mtools --noconfirm
 if [ -d /sys/firmware/efi ]; then
   mkdir /boot/EFI
   mount "$bootdevice"1 /boot/EFI  #Mount FAT32 EFI partition
@@ -77,6 +76,7 @@ LC_TIME=it_IT.UTF-8
 EOF
 echo "KEYMAP=it" > /etc/vconsole.conf
 localectl set-keymap it
+localectl --no-convert set-x11-keymap it pc104 ,qwerty grp:win_space_toggle
 
 echo "Configuring hostname"
 echo "$hostname" > /etc/hostname

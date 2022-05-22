@@ -26,13 +26,13 @@ i3-gaps
 i3status
 i3lock
 py3status
-xorg
+xorgq
 xorg-xinit
 lightdm
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
 
-rofi
+rofigtcd
 dex
 xss-lock
 gtk2
