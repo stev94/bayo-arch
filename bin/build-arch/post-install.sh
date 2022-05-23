@@ -166,9 +166,7 @@ su "$username" <<EOF
   chmod +x dunst/alert.sh
 
   # copy configs
-  cp "$ROOT_DIR"/configs/home/.Xresources ~/
-  cp "$ROOT_DIR"/configs/home/.profile ~/
-  cp "$ROOT_DIR"/configs/home/.xinitrc ~/
+  cp "$ROOT_DIR"/configs/home/* ~/
 
   # install oh-y-zsh
   bash "$ROOT_DIR"/bin/build-arch/set-zsh.sh
@@ -178,6 +176,9 @@ su "$username" <<EOF
 
   # install grub theme
   bash "$ROOT_DIR"/bin/build-arch/install-grub-theme.sh
+
+  # setting wallpaper
+  cp "$ROOT_DIR"/data/media/wallpapers/fractal-br.jpg /usr/share/backgrounds/
 EOF
 
 #echo "Setting theme"

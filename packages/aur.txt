@@ -13,5 +13,6 @@ chroma
 gitflow-avh
 jetbrains-toolbox
 lua-luajson
-# fonts
 ttf-symbola
+mugshot
+libcurl3-gnutls

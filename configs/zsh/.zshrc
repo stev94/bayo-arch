@@ -1,8 +1,9 @@
-# executing user's commands at ending of initial progress
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export ZSH="/home/stev/.config/zsh/oh-my-zsh"
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.config/zsh/"
 source $ZSH/oh-my-zsh.sh
-# source $ZSH/plugins/kube-ps1/kube-ps1.plugin.zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -133,16 +134,6 @@ COMPLETION_WAITING_DOTS="%F{cyan}waiting...%f"
 ##################
 # AUTOCOMPLETION #
 ##################
-# shellcheck source=/home/stev/.akamas/akamas_autocomplete.sh
-source ~/.akamas/akamas_autocomplete.sh
-
-#########
-# ALIAS #
-#########
-# override normal commands with colorize ones
-alias cat='ccat'
-alias less='cless'
-
 ###########
 # SOURCES #
 ###########

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ZSH=~/.config/zsh/oh-my-zsh
+chsh /usr/bin/zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cp "$ROOT_DIR"/configs/zsh/.zprofile ~/.config/zsh/
 cp "$ROOT_DIR"/configs/zsh/.zshrc ~/.config/zsh/

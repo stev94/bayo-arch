@@ -11,6 +11,7 @@ alias cdd='cd ~'
 
 alias cat='cat '
 alias cta='cat'
+alias cat='ccat'
 
 alias ll="ls -lah -S --classify"
 
